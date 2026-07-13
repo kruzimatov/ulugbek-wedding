@@ -959,11 +959,6 @@ h2 {
     gap: clamp(0.65rem, 1.8vw, 1rem);
 }
 
-.map-links--single {
-    width: min(360px, 100%);
-    grid-template-columns: 1fr;
-}
-
 .map-link {
     display: inline-grid;
     place-items: center;
