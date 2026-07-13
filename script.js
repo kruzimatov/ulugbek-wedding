@@ -7,7 +7,7 @@ const languageButtons = document.querySelectorAll(".language-option");
 const musicToggleBtn = document.getElementById("musicToggleBtn");
 const backgroundMusic = document.getElementById("backgroundMusic");
 
-const targetWeddingDate = new Date("2026-07-26T00:00:00+05:00").getTime();
+const targetWeddingDate = new Date("2026-07-26T18:00:00+05:00").getTime();
 const OPENING_DURATION_MS = 1000;
 const DEFAULT_LANGUAGE = "uz";
 const LANGUAGE_STORAGE_KEY = "weddingInvitationLanguage";
@@ -51,9 +51,9 @@ const LOCALES = {
         weekdaySun: "ВС",
         locationTitle: "Место проведения",
         venueName: "Тойхона Umid",
-        venueDate: "26.07.2026",
-        venueAddress: "село Яккатут",
-        venueLandmark: "Umid to'yxonasi",
+        venueTime: "В 18:00",
+        venueAddress: "Фергана, Узбекистан",
+        venueLandmark: "село Яккатут, Umid to'yxonasi",
         mapLinkYandex: "Яндекс Карты",
         mapLinkGoogle: "Google Maps",
         countdownTitle: "Считаем каждое мгновение",
@@ -102,9 +102,9 @@ const LOCALES = {
         weekdaySun: "YA",
         locationTitle: "To'y manzili",
         venueName: "Umid to'yxonasi",
-        venueDate: "26.07.2026",
-        venueAddress: "Yakkatut qishlog'i",
-        venueLandmark: "Umid to'yxonasi",
+        venueTime: "Soat 18:00 da",
+        venueAddress: "Farg'ona, O'zbekiston",
+        venueLandmark: "Yakkatut qishlog'i, Umid to'yxonasi",
         mapLinkYandex: "Yandex xaritasi",
         mapLinkGoogle: "Google Maps",
         countdownTitle: "Har lahzani sanayapmiz",
@@ -149,9 +149,9 @@ const LOCALES = {
         weekdaySun: "Su",
         locationTitle: "Venue",
         venueName: "Umid Wedding Hall",
-        venueDate: "July 26, 2026",
-        venueAddress: "Yakkatut village",
-        venueLandmark: "Umid to'yxonasi",
+        venueTime: "At 18:00",
+        venueAddress: "Fergana, Uzbekistan",
+        venueLandmark: "Yakkatut village, Umid to'yxonasi",
         mapLinkYandex: "Yandex Maps",
         mapLinkGoogle: "Google Maps",
         countdownTitle: "Counting every moment",
