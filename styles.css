@@ -2426,8 +2426,8 @@ body.invitation-visible .heritage-horn--right {
 .heritage-couple {
     position: relative;
     z-index: 1;
-    width: min(100%, clamp(160px, 32vw, 260px));
-    margin-top: clamp(1.5rem, 4vh, 3rem);
+    width: min(100%, clamp(280px, 55vw, 460px));
+    margin-top: clamp(1rem, 3vh, 2rem);
     height: auto;
     object-fit: contain;
     border-radius: 12px;
@@ -2532,8 +2532,8 @@ body.invitation-visible .heritage-horn--right {
     }
 
     .heritage-couple {
-        width: min(100%, clamp(220px, 42vw, 360px));
-        margin-top: clamp(3rem, 10vh, 8rem);
+        width: min(100%, clamp(320px, 70vw, 520px));
+        margin-top: clamp(2rem, 6vh, 5rem);
     }
 
     .scroll-indicator.scroll-indicator--hero {
@@ -2592,8 +2592,8 @@ body.invitation-visible .heritage-horn--right {
     }
 
     .heritage-couple {
-        width: min(100%, clamp(200px, 44vw, 300px));
-        margin-top: clamp(2.5rem, 6vh, 5rem);
+        width: min(100%, clamp(280px, 68vw, 440px));
+        margin-top: clamp(1.5rem, 4vh, 3.5rem);
     }
 
     .scroll-indicator.scroll-indicator--hero {
@@ -2642,8 +2642,8 @@ body.invitation-visible .heritage-horn--right {
     }
 
     .heritage-couple {
-        width: min(100%, clamp(180px, 44vw, 280px));
-        margin-top: clamp(2rem, 6vh, 4rem);
+        width: min(100%, clamp(260px, 66vw, 400px));
+        margin-top: clamp(1.5rem, 4vh, 3rem);
     }
 }
 
@@ -2691,8 +2691,8 @@ body.invitation-visible .heritage-horn--right {
     }
 
     .heritage-couple {
-        width: min(100%, clamp(200px, 48vw, 320px));
-        margin-top: clamp(2.5rem, 8vh, 6rem);
+        width: min(100%, clamp(280px, 72vw, 420px));
+        margin-top: clamp(1.5rem, 5vh, 4rem);
     }
 
     .scroll-indicator.scroll-indicator--hero {
@@ -2755,8 +2755,8 @@ body.invitation-visible .heritage-horn--right {
     }
 
     .heritage-couple {
-        width: min(100%, clamp(180px, 46vw, 260px));
-        margin-top: clamp(2.5rem, 6vh, 3.5rem);
+        width: min(100%, clamp(260px, 70vw, 380px));
+        margin-top: clamp(1.5rem, 4vh, 2.5rem);
     }
 
     .scroll-indicator.scroll-indicator--hero {
@@ -2819,8 +2819,8 @@ body.invitation-visible .heritage-horn--right {
     }
 
     .heritage-couple {
-        width: min(100%, clamp(170px, 44vw, 240px));
-        margin-top: clamp(2rem, 5vh, 3rem);
+        width: min(100%, clamp(240px, 68vw, 350px));
+        margin-top: clamp(1.5rem, 4vh, 2.5rem);
     }
 
     .scroll-indicator.scroll-indicator--hero {
