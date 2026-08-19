@@ -95,7 +95,7 @@ function setupWishesForm() {
             form.reset();
             if (submitBtn) submitBtn.disabled = false;
             var locale = getLocale();
-            alert(locale.wishesFormDesc || "Tilagingiz ko'rib chiqilgandan so'ng sahifada chop etiladi.");
+            alert("Rahmat! Tilagingiz qo'shildi.");
         }).catch(function() {
             if (submitBtn) submitBtn.disabled = false;
             alert("Xatolik yuz berdi. Qayta urinib ko'ring.");
