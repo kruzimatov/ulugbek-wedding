@@ -47,7 +47,7 @@ function renderWishes() {
     if (!grid) return;
     grid.innerHTML = "";
     INITIAL_WISHES.forEach(function(w) { grid.appendChild(createWishCard(w, false)); });
-    db.collection("wishes").where("approved", "==", true).orderBy("createdAt", "asc")
+    db.collection("wishes").where("approved", "==", true)
         .onSnapshot(function(snapshot) {
             var cards = grid.querySelectorAll(".wish-card--firestore");
             cards.forEach(function(c) { c.remove(); });
