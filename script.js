@@ -19,8 +19,8 @@ const ONE_DAY_MS = ONE_HOUR_MS * 24;
 
 const WISHES_STORAGE_KEY = "weddingWishes";
 const INITIAL_WISHES = [
-    { name: "Bahora Xolmurodova💕", text: "Oyshabegim opa baxtli bo'liing, yangi hayotingiz go'zal va shukrli lahzalarga to'la bo'lsin💎✨" },
-    { name: "Maftuna", text: "Ma'rufjon aka va Oyshabegim sizlarga o'zlarizdek chiroyli baxt tilayman." },
+    { name: "Bahora Xolmurodova💕", text: "Oishabegim opa baxtli bo'liing, yangi hayotingiz go'zal va shukrli lahzalarga to'la bo'lsin💎✨" },
+    { name: "Maftuna", text: "Ma'rufjon aka va Oishabegim sizlarga o'zlarizdek chiroyli baxt tilayman." },
     { name: "Farrux&Diyora", text: "Koop koop baxtlar tilaymiz" },
 ];
 
@@ -101,8 +101,8 @@ function setupWishesForm() {
 
 const LOCALES = {
     ru: {
-        pageTitle: "Маъруфжон и Ойшабегим | Свадебное приглашение",
-        metaDescription: "Свадебное приглашение Маъруфжона и Ойшабегим на 30 августа 2026 года.",
+        pageTitle: "Маъруфжон и Оишабегим | Свадебное приглашение",
+        metaDescription: "Свадебное приглашение Маъруфжона и Оишабегим на 30 августа 2026 года.",
         ariaIntro: "Конверт с приглашением",
         ariaEnvelope: "Запечатанный бумажный конверт",
         ariaWeddingDate: "Дата свадьбы",
@@ -114,7 +114,7 @@ const LOCALES = {
         envelopeTopNote: "<span class=\"flap-note-top\">ВЫ</span><span class=\"flap-note-middle\">ПРИГЛАШЕНЫ</span><span class=\"flap-note-script\">на нашу свадьбу</span>",
         withLove: "с любовью,",
         signatureNames: "МАЪРУФЖОН И ОЙШАБЕГИМ",
-        ornamentNames: "<span class=\"ornament-name-line\">Маъруфжон</span><span class=\"ornament-name-amp\">и</span><span class=\"ornament-name-line\">Ойшабегим</span>",
+        ornamentNames: "<span class=\"ornament-name-line\">Маъруфжон</span><span class=\"ornament-name-amp\">и</span><span class=\"ornament-name-line\">Оишабегим</span>",
         ornamentMessage: "Спешим сообщить<br />радостную новость:<br />мы женимся!",
         ornamentDay: "30",
         ornamentMonth: "08",
@@ -163,8 +163,8 @@ const LOCALES = {
         wishesSubmit: "ОТПРАВИТЬ",
     },
     uz: {
-        pageTitle: "Ma'rufjon va Oyshabegim | To'y taklifnomasi",
-        metaDescription: "Ma'rufjon va Oyshabegimning 2026-yil 30-avgustdagi to'y taklifnomasi.",
+        pageTitle: "Ma'rufjon va Oishabegim | To'y taklifnomasi",
+        metaDescription: "Ma'rufjon va Oishabegimning 2026-yil 30-avgustdagi to'y taklifnomasi.",
         ariaIntro: "Taklifnoma konverti",
         ariaEnvelope: "Muhrlangan qog'oz konvert",
         ariaWeddingDate: "To'y sanasi",
@@ -176,7 +176,7 @@ const LOCALES = {
         envelopeTopNote: "<span class=\"flap-note-top\">SIZ</span><span class=\"flap-note-middle\">TO'YIMIZGA</span><span class=\"flap-note-script\">taklif etilgansiz</span>",
         withLove: "muhabbat ila,",
         signatureNames: "MA'RUFJON VA OYSHABEGIM",
-        ornamentNames: "<span class=\"ornament-name-line\">Ma'rufjon</span><span class=\"ornament-name-amp\">va</span><span class=\"ornament-name-line\">Oyshabegim</span>",
+        ornamentNames: "<span class=\"ornament-name-line\">Ma'rufjon</span><span class=\"ornament-name-amp\">va</span><span class=\"ornament-name-line\">Oishabegim</span>",
         ornamentMessage: "Quvonchli yangilik:<br />biz turmush<br />quramiz!",
         ornamentDay: "30",
         ornamentMonth: "08",
@@ -225,8 +225,8 @@ const LOCALES = {
         wishesSubmit: "YUBORISH",
     },
     en: {
-        pageTitle: "Ma'rufjon and Oyshabegim | Wedding Invitation",
-        metaDescription: "Wedding invitation of Ma'rufjon and Oyshabegim, August 30, 2026.",
+        pageTitle: "Ma'rufjon and Oishabegim | Wedding Invitation",
+        metaDescription: "Wedding invitation of Ma'rufjon and Oishabegim, August 30, 2026.",
         ariaIntro: "Invitation envelope",
         ariaEnvelope: "Sealed paper envelope",
         ariaWeddingDate: "Wedding date",
@@ -238,7 +238,7 @@ const LOCALES = {
         envelopeTopNote: "<span class=\"flap-note-top\">YOU ARE</span><span class=\"flap-note-middle\">INVITED</span><span class=\"flap-note-script\">to our wedding</span>",
         withLove: "with love,",
         signatureNames: "MA'RUFJON & OYSHABEGIM",
-        ornamentNames: "<span class=\"ornament-name-line\">Ma'rufjon</span><span class=\"ornament-name-amp\">&</span><span class=\"ornament-name-line\">Oyshabegim</span>",
+        ornamentNames: "<span class=\"ornament-name-line\">Ma'rufjon</span><span class=\"ornament-name-amp\">&</span><span class=\"ornament-name-line\">Oishabegim</span>",
         heroNames: "Dear\u00a0friends<br /><span class=\"no-break\">and family!</span>",
         openHere: "open",
         lead: "One of the happiest days of our lives — our wedding — and we want to celebrate it with you.<br /><br />We sincerely invite you to join us on this special evening.<br /><br /><strong>We look forward to having you as our cherished guest.</strong>",
