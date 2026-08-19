@@ -17,10 +17,92 @@ const ONE_MINUTE_MS = ONE_SECOND_MS * 60;
 const ONE_HOUR_MS = ONE_MINUTE_MS * 60;
 const ONE_DAY_MS = ONE_HOUR_MS * 24;
 
+const WISHES_STORAGE_KEY = "weddingWishes";
+const INITIAL_WISHES = [
+    { name: "Bahora Xolmurodova💕", text: "Oyshabegim opa baxtli bo'liing, yangi hayotingiz go'zal va shukrli lahzalarga to'la bo'lsin💎✨" },
+    { name: "Maftuna", text: "Ma'rufjon aka va Oyshabegim sizlarga o'zlarizdek chiroyli baxt tilayman." },
+    { name: "Farrux&Diyora", text: "Koop koop baxtlar tilaymiz" },
+];
+
+function getStoredWishes() {
+    try {
+        const raw = localStorage.getItem(WISHES_STORAGE_KEY);
+        return raw ? JSON.parse(raw) : [];
+    } catch (_) { return []; }
+}
+
+function saveWish(wish) {
+    const wishes = getStoredWishes();
+    wishes.push(wish);
+    try { localStorage.setItem(WISHES_STORAGE_KEY, JSON.stringify(wishes)); } catch (_) {}
+}
+
+function getAllWishes() {
+    return [...INITIAL_WISHES, ...getStoredWishes()];
+}
+
+function createWishCard(wish, isNew) {
+    const card = document.createElement("div");
+    card.className = "wish-card" + (isNew ? " wish-card--new" : "");
+    card.innerHTML = '<p class="wish-text"></p><p class="wish-author"></p>';
+    card.querySelector(".wish-text").textContent = wish.text;
+    card.querySelector(".wish-author").textContent = wish.name;
+    return card;
+}
+
+function renderWishes() {
+    const grid = document.getElementById("wishesGrid");
+    if (!grid) return;
+    grid.innerHTML = "";
+    getAllWishes().forEach(function(w) { grid.appendChild(createWishCard(w, false)); });
+}
+
+function setupWishesToggle() {
+    const btn = document.getElementById("wishesToggleBtn");
+    const grid = document.getElementById("wishesGrid");
+    if (!btn || !grid) return;
+    let expanded = false;
+    btn.addEventListener("click", function() {
+        expanded = !expanded;
+        grid.classList.toggle("expanded", expanded);
+        const locale = getLocale();
+        btn.textContent = expanded ? (locale.wishesHideAll || "YOPISH") : (locale.wishesShowAll || "BARCHA TILAKLARNI KO'RISH");
+    });
+}
+
+function setupWishesForm() {
+    const form = document.getElementById("wishesForm");
+    if (!form) return;
+    form.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const nameInput = document.getElementById("wishName");
+        const msgInput = document.getElementById("wishMessage");
+        const name = nameInput.value.trim();
+        const text = msgInput.value.trim();
+        if (!name) { nameInput.focus(); return; }
+        if (!text) { msgInput.focus(); return; }
+        const wish = { name: name, text: text };
+        saveWish(wish);
+        const grid = document.getElementById("wishesGrid");
+        if (grid) {
+            grid.classList.add("expanded");
+            const card = createWishCard(wish, true);
+            grid.appendChild(card);
+            card.scrollIntoView({ behavior: "smooth", block: "center" });
+        }
+        const toggleBtn = document.getElementById("wishesToggleBtn");
+        if (toggleBtn) {
+            const locale = getLocale();
+            toggleBtn.textContent = locale.wishesHideAll || "YOPISH";
+        }
+        form.reset();
+    });
+}
+
 const LOCALES = {
     ru: {
-        pageTitle: "Улугбек и Дилнура | Свадебное приглашение",
-        metaDescription: "Свадебное приглашение Улугбека и Дилнуры на 26 июля 2026 года.",
+        pageTitle: "Маъруфжон и Ойшабегим | Свадебное приглашение",
+        metaDescription: "Свадебное приглашение Маъруфжона и Ойшабегим на 26 июля 2026 года.",
         ariaIntro: "Конверт с приглашением",
         ariaEnvelope: "Запечатанный бумажный конверт",
         ariaWeddingDate: "Дата свадьбы",
@@ -29,10 +111,10 @@ const LOCALES = {
         ariaOrnamentHero: "Традиционная страница с именами молодоженов",
         ariaVenueDetails: "Место проведения",
         ariaCountdown: "Обратный отсчет",
-        envelopeTopNote: "<span class=\"flap-note-top\">U/D</span><span class=\"flap-note-middle\">СВАДЕБНАЯ ЦЕРЕМОНИЯ</span>",
-        withLove: "Нажмите, чтобы открыть",
-        signatureNames: "ПРИГЛАШЕНИЕ",
-        ornamentNames: "<span class=\"ornament-name-line\">Улугбек</span><span class=\"ornament-name-amp\">и</span><span class=\"ornament-name-line\">Дилнура</span>",
+        envelopeTopNote: "<span class=\"flap-note-top\">ВЫ</span><span class=\"flap-note-middle\">ПРИГЛАШЕНЫ</span><span class=\"flap-note-script\">на нашу свадьбу</span>",
+        withLove: "с любовью,",
+        signatureNames: "МАЪРУФЖОН И ОЙШАБЕГИМ",
+        ornamentNames: "<span class=\"ornament-name-line\">Маъруфжон</span><span class=\"ornament-name-amp\">и</span><span class=\"ornament-name-line\">Ойшабегим</span>",
         ornamentMessage: "Спешим сообщить<br />радостную новость:<br />мы женимся!",
         ornamentDay: "26",
         ornamentMonth: "07",
@@ -68,10 +150,21 @@ const LOCALES = {
         languageUzLabel: "O'zbekcha",
         musicPlayLabel: "Включить музыку",
         musicPauseLabel: "Остановить музыку",
+        wishesTitle: "Пожелания",
+        wishesSubtitle: "ТЁПЛЫЕ СЛОВА ОТ БЛИЗКИХ",
+        wishesShowAll: "ПОКАЗАТЬ ВСЕ ПОЖЕЛАНИЯ",
+        wishesHideAll: "СКРЫТЬ",
+        wishesFormTitle: "Оставьте пожелание",
+        wishesFormDesc: "Ваше пожелание будет опубликовано после проверки.",
+        wishesNameLabel: "ВАШЕ ИМЯ",
+        wishesNamePlaceholder: "Введите ваше имя",
+        wishesMessageLabel: "ПОЖЕЛАНИЕ",
+        wishesMessagePlaceholder: "Тёплые слова для молодожёнов...",
+        wishesSubmit: "ОТПРАВИТЬ",
     },
     uz: {
-        pageTitle: "Ulug'bek va Dilnura | To'y taklifnomasi",
-        metaDescription: "Ulug'bek va Dilnuraning 2026-yil 26-iyuldagi to'y taklifnomasi.",
+        pageTitle: "Ma'rufjon va Oyshabegim | To'y taklifnomasi",
+        metaDescription: "Ma'rufjon va Oyshabegimning 2026-yil 26-iyuldagi to'y taklifnomasi.",
         ariaIntro: "Taklifnoma konverti",
         ariaEnvelope: "Muhrlangan qog'oz konvert",
         ariaWeddingDate: "To'y sanasi",
@@ -80,10 +173,10 @@ const LOCALES = {
         ariaOrnamentHero: "Yoshlar ismlari tushirilgan an'anaviy sahifa",
         ariaVenueDetails: "Manzil",
         ariaCountdown: "Orqaga sanoq",
-        envelopeTopNote: "<span class=\"flap-note-top\">U/D</span><span class=\"flap-note-middle\">NIKOH MAROSIMI</span>",
-        withLove: "Taklifnomani ochish uchun",
-        signatureNames: "BOSING",
-        ornamentNames: "<span class=\"ornament-name-line\">Ulug'bek</span><span class=\"ornament-name-amp\">va</span><span class=\"ornament-name-line\">Dilnura</span>",
+        envelopeTopNote: "<span class=\"flap-note-top\">SIZ</span><span class=\"flap-note-middle\">TO'YIMIZGA</span><span class=\"flap-note-script\">taklif etilgansiz</span>",
+        withLove: "muhabbat ila,",
+        signatureNames: "MA'RUFJON VA OYSHABEGIM",
+        ornamentNames: "<span class=\"ornament-name-line\">Ma'rufjon</span><span class=\"ornament-name-amp\">va</span><span class=\"ornament-name-line\">Oyshabegim</span>",
         ornamentMessage: "Quvonchli yangilik:<br />biz turmush<br />quramiz!",
         ornamentDay: "26",
         ornamentMonth: "07",
@@ -119,10 +212,21 @@ const LOCALES = {
         languageUzLabel: "O'zbekcha",
         musicPlayLabel: "Musiqani yoqish",
         musicPauseLabel: "Musiqani to'xtatish",
+        wishesTitle: "Tilaklar",
+        wishesSubtitle: "YAQINLARIMIZDAN ILIQ SO'ZLAR",
+        wishesShowAll: "BARCHA TILAKLARNI KO'RISH",
+        wishesHideAll: "YOPISH",
+        wishesFormTitle: "Tilak qoldiring",
+        wishesFormDesc: "Tilagingiz ko'rib chiqilgandan so'ng sahifada chop etiladi.",
+        wishesNameLabel: "ISMINGIZ",
+        wishesNamePlaceholder: "Ismingizni kiriting",
+        wishesMessageLabel: "TILAGINGIZ",
+        wishesMessagePlaceholder: "Kelin-kuyovga iliq so’zlaringiz...",
+        wishesSubmit: "YUBORISH",
     },
     en: {
-        pageTitle: "Ulug'bek and Dilnura | Wedding Invitation",
-        metaDescription: "Wedding invitation of Ulug'bek and Dilnura, July 26, 2026.",
+        pageTitle: "Ma'rufjon and Oyshabegim | Wedding Invitation",
+        metaDescription: "Wedding invitation of Ma'rufjon and Oyshabegim, July 26, 2026.",
         ariaIntro: "Invitation envelope",
         ariaEnvelope: "Sealed paper envelope",
         ariaWeddingDate: "Wedding date",
@@ -131,10 +235,10 @@ const LOCALES = {
         ariaOrnamentHero: "Traditional page with the names of the couple",
         ariaVenueDetails: "Venue details",
         ariaCountdown: "Countdown",
-        envelopeTopNote: "<span class=\"flap-note-top\">U/D</span><span class=\"flap-note-middle\">WEDDING CEREMONY</span>",
-        withLove: "Tap to open",
-        signatureNames: "INVITATION",
-        ornamentNames: "<span class=\"ornament-name-line\">Ulug'bek</span><span class=\"ornament-name-amp\">&</span><span class=\"ornament-name-line\">Dilnura</span>",
+        envelopeTopNote: "<span class=\"flap-note-top\">YOU ARE</span><span class=\"flap-note-middle\">INVITED</span><span class=\"flap-note-script\">to our wedding</span>",
+        withLove: "with love,",
+        signatureNames: "MA'RUFJON & OYSHABEGIM",
+        ornamentNames: "<span class=\"ornament-name-line\">Ma'rufjon</span><span class=\"ornament-name-amp\">&</span><span class=\"ornament-name-line\">Oyshabegim</span>",
         heroNames: "Dear\u00a0friends<br /><span class=\"no-break\">and family!</span>",
         openHere: "open",
         lead: "One of the happiest days of our lives — our wedding — and we want to celebrate it with you.<br /><br />We sincerely invite you to join us on this special evening.<br /><br /><strong>We look forward to having you as our cherished guest.</strong>",
@@ -166,6 +270,17 @@ const LOCALES = {
         languageUzLabel: "Uzbek",
         musicPlayLabel: "Play music",
         musicPauseLabel: "Pause music",
+        wishesTitle: "Wishes",
+        wishesSubtitle: "WARM WORDS FROM LOVED ONES",
+        wishesShowAll: "VIEW ALL WISHES",
+        wishesHideAll: "HIDE",
+        wishesFormTitle: "Leave a wish",
+        wishesFormDesc: "Your wish will be published after review.",
+        wishesNameLabel: "YOUR NAME",
+        wishesNamePlaceholder: "Enter your name",
+        wishesMessageLabel: "YOUR WISH",
+        wishesMessagePlaceholder: "Warm words for the couple...",
+        wishesSubmit: "SUBMIT",
     },
 
 };
@@ -421,3 +536,7 @@ const countdownInterval = window.setInterval(() => {
     const hasTimeLeft = updateCountdown();
     if (!hasTimeLeft) window.clearInterval(countdownInterval);
 }, 1000);
+
+renderWishes();
+setupWishesToggle();
+setupWishesForm();

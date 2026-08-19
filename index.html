@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content="Ulug'bek va Dilnuraning 2026-yil 26-iyuldagi to'y taklifnomasi."/>
-    <meta property="og:title" content="Ulug'bek va Dilnura | To'y taklifnomasi"/>
-    <meta property="og:description" content="Ulug'bek va Dilnuraning to'y taklifnomasi. 2026-yil 26-iyul, soat 18:00. Farg'ona viloyati, O'zbekiston tumani."/>
+    <meta name="description" content="Ma'rufjon va Oyshabegimning 2026-yil 26-iyuldagi to'y taklifnomasi."/>
+    <meta property="og:title" content="Ma'rufjon va Oyshabegim | To'y taklifnomasi"/>
+    <meta property="og:description" content="Ma'rufjon va Oyshabegimning to'y taklifnomasi. 2026-yil 26-iyul, soat 18:00. Farg'ona viloyati, O'zbekiston tumani."/>
     <meta property="og:type" content="website"/>
     <meta name="twitter:card" content="summary_large_image"/>
-    <title>Ulug'bek va Dilnura | To'y taklifnomasi</title>
+    <title>Ma'rufjon va Oyshabegim | To'y taklifnomasi</title>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Corinthia:wght@400;700&family=Great+Vibes&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap"
@@ -31,16 +31,17 @@
     <div class="envelope-stage" id="envelope" role="img" aria-label="Muhrlangan qog'oz konvert">
         <div class="flap flap-top">
             <p class="flap-note" data-i18n-html="envelopeTopNote">
-                <span class="flap-note-top">U/D</span>
-                <span class="flap-note-middle">NIKOH MAROSIMI</span>
+                <span class="flap-note-top">SIZ</span>
+                <span class="flap-note-middle">TO'YIMIZGA</span>
+                <span class="flap-note-script">taklif etilgansiz</span>
             </p>
         </div>
         <div class="flap flap-left"></div>
         <div class="flap flap-right"></div>
         <div class="flap flap-bottom">
             <p class="flap-signature">
-                <span data-i18n="withLove">Taklifnomani ochish uchun</span><br/>
-                <strong data-i18n="signatureNames">BOSING</strong>
+                <span data-i18n="withLove">muhabbat ila,</span><br/>
+                <strong data-i18n="signatureNames">MA'RUFJON VA OYSHABEGIM</strong>
             </p>
         </div>
         <button class="seal-button" id="openInviteBtn" type="button" aria-expanded="false">
@@ -58,9 +59,9 @@
                 <img class="heritage-horn heritage-horn--right" src="assets/musicInstrument.png" alt=""/>
             </div>
             <p class="ornament-names heritage-names" data-i18n-html="ornamentNames">
-                <span class="ornament-name-line">Ulug'bek</span>
+                <span class="ornament-name-line">Ma'rufjon</span>
                 <span class="ornament-name-amp">va</span>
-                <span class="ornament-name-line">Dilnura</span>
+                <span class="ornament-name-line">Oyshabegim</span>
             </p>
             <img class="heritage-couple" src="assets/couple.png" alt="" aria-hidden="true"/>
         </article>
@@ -185,6 +186,40 @@
             </p>
         </section>
     </div>
+
+    <section class="wishes-section reveal" id="wishesSection" aria-label="Tilaklar">
+        <h2 class="wishes-title" data-i18n="wishesTitle">Tilaklar</h2>
+        <p class="wishes-subtitle" data-i18n="wishesSubtitle">YAQINLARIMIZDAN ILIQ SO'ZLAR</p>
+
+        <div class="wishes-grid" id="wishesGrid">
+            <!-- Wishes rendered by JS -->
+        </div>
+
+        <button class="wishes-toggle-btn" id="wishesToggleBtn" type="button" data-i18n="wishesShowAll">
+            BARCHA TILAKLARNI KO'RISH
+        </button>
+
+        <div class="wishes-form-card">
+            <h3 class="wishes-form-title" data-i18n="wishesFormTitle">Tilak qoldiring</h3>
+            <p class="wishes-form-desc" data-i18n="wishesFormDesc">Tilagingiz ko'rib chiqilgandan so'ng sahifada chop etiladi.</p>
+            <form class="wishes-form" id="wishesForm" novalidate>
+                <label class="wishes-label" for="wishName">
+                    <span data-i18n="wishesNameLabel">ISMINGIZ</span> *
+                </label>
+                <input class="wishes-input" id="wishName" type="text" required
+                       data-i18n-attr="placeholder:wishesNamePlaceholder" placeholder="Ismingizni kiriting"/>
+
+                <label class="wishes-label" for="wishMessage">
+                    <span data-i18n="wishesMessageLabel">TILAGINGIZ</span>
+                </label>
+                <textarea class="wishes-textarea" id="wishMessage" rows="4"
+                          data-i18n-attr="placeholder:wishesMessagePlaceholder"
+                          placeholder="Kelin-kuyovga iliq so'zlaringiz..."></textarea>
+
+                <button class="wishes-submit-btn" type="submit" data-i18n="wishesSubmit">YUBORISH</button>
+            </form>
+        </div>
+    </section>
 
 </main>
 
