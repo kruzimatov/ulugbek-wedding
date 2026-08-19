@@ -17,29 +17,21 @@ const ONE_MINUTE_MS = ONE_SECOND_MS * 60;
 const ONE_HOUR_MS = ONE_MINUTE_MS * 60;
 const ONE_DAY_MS = ONE_HOUR_MS * 24;
 
-const WISHES_STORAGE_KEY = "weddingWishes";
+firebase.initializeApp({
+    apiKey: "AIzaSyCSGIjGP3U45oSkW1cyUI8X43mynbFZ5zo",
+    authDomain: "wedding-day-f7556.firebaseapp.com",
+    projectId: "wedding-day-f7556",
+    storageBucket: "wedding-day-f7556.firebasestorage.app",
+    messagingSenderId: "53647869065",
+    appId: "1:53647869065:web:ca611be74430d4b6b5b258"
+});
+const db = firebase.firestore();
+
 const INITIAL_WISHES = [
     { name: "Bahora Xolmurodova💕", text: "Oishabegim opa baxtli bo'liing, yangi hayotingiz go'zal va shukrli lahzalarga to'la bo'lsin💎✨" },
     { name: "Maftuna", text: "Ma'rufjon aka va Oishabegim sizlarga o'zlarizdek chiroyli baxt tilayman." },
     { name: "Farrux&Diyora", text: "Koop koop baxtlar tilaymiz" },
 ];
-
-function getStoredWishes() {
-    try {
-        const raw = localStorage.getItem(WISHES_STORAGE_KEY);
-        return raw ? JSON.parse(raw) : [];
-    } catch (_) { return []; }
-}
-
-function saveWish(wish) {
-    const wishes = getStoredWishes();
-    wishes.push(wish);
-    try { localStorage.setItem(WISHES_STORAGE_KEY, JSON.stringify(wishes)); } catch (_) {}
-}
-
-function getAllWishes() {
-    return [...INITIAL_WISHES, ...getStoredWishes()];
-}
 
 function createWishCard(wish, isNew) {
     const card = document.createElement("div");
@@ -54,7 +46,18 @@ function renderWishes() {
     const grid = document.getElementById("wishesGrid");
     if (!grid) return;
     grid.innerHTML = "";
-    getAllWishes().forEach(function(w) { grid.appendChild(createWishCard(w, false)); });
+    INITIAL_WISHES.forEach(function(w) { grid.appendChild(createWishCard(w, false)); });
+    db.collection("wishes").where("approved", "==", true).orderBy("createdAt", "asc")
+        .onSnapshot(function(snapshot) {
+            var cards = grid.querySelectorAll(".wish-card--firestore");
+            cards.forEach(function(c) { c.remove(); });
+            snapshot.forEach(function(doc) {
+                var d = doc.data();
+                var card = createWishCard({ name: d.name, text: d.text }, false);
+                card.classList.add("wish-card--firestore");
+                grid.appendChild(card);
+            });
+        });
 }
 
 function setupWishesToggle() {
@@ -81,21 +84,22 @@ function setupWishesForm() {
         const text = msgInput.value.trim();
         if (!name) { nameInput.focus(); return; }
         if (!text) { msgInput.focus(); return; }
-        const wish = { name: name, text: text };
-        saveWish(wish);
-        const grid = document.getElementById("wishesGrid");
-        if (grid) {
-            grid.classList.add("expanded");
-            const card = createWishCard(wish, true);
-            grid.appendChild(card);
-            card.scrollIntoView({ behavior: "smooth", block: "center" });
-        }
-        const toggleBtn = document.getElementById("wishesToggleBtn");
-        if (toggleBtn) {
-            const locale = getLocale();
-            toggleBtn.textContent = locale.wishesHideAll || "YOPISH";
-        }
-        form.reset();
+        var submitBtn = form.querySelector(".wishes-submit-btn");
+        if (submitBtn) submitBtn.disabled = true;
+        db.collection("wishes").add({
+            name: name,
+            text: text,
+            approved: false,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        }).then(function() {
+            form.reset();
+            if (submitBtn) submitBtn.disabled = false;
+            var locale = getLocale();
+            alert(locale.wishesFormDesc || "Tilagingiz ko'rib chiqilgandan so'ng sahifada chop etiladi.");
+        }).catch(function() {
+            if (submitBtn) submitBtn.disabled = false;
+            alert("Xatolik yuz berdi. Qayta urinib ko'ring.");
+        });
     });
 }
 
