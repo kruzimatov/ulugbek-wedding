@@ -89,7 +89,7 @@ function setupWishesForm() {
         db.collection("wishes").add({
             name: name,
             text: text,
-            approved: false,
+            approved: true,
             createdAt: firebase.firestore.FieldValue.serverTimestamp()
         }).then(function() {
             form.reset();
